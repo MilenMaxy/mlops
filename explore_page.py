@@ -62,12 +62,12 @@ def show_explore_page():
 
     data = df["Country"].value_counts()
 
-    # Specify colors for the first bar chart
-    bar_colors_countries = sns.color_palette("pastel", len(data))
+    # Specify colors for the bar plot
+    bar_colors = sns.color_palette("viridis", len(data))
 
     # Replace the pie chart with a bar chart
     st.write("""#### Number of Data from different countries""")
-    st.bar_chart(data, color=bar_colors_countries)
+    st.bar_chart(data, color=bar_colors)
 
     st.write(
         """
@@ -76,11 +76,7 @@ def show_explore_page():
     )
 
     data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
-    
-    # Specify colors for the second bar chart
-    bar_colors_salary = sns.color_palette("deep", len(data))
-    
-    st.bar_chart(data, color=bar_colors_salary)
+    st.bar_chart(data)
 
     st.write(
         """
