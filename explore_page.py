@@ -50,7 +50,6 @@ def load_data():
     return df
 
 df = load_data()
-
 def show_explore_page():
     st.title("Explore Software Engineer Salaries")
 
@@ -62,14 +61,10 @@ def show_explore_page():
 
     data = df["Country"].value_counts()
 
-    fig1, ax1 = plt.subplots()
-    ax1.pie(data, labels=data.index, autopct="%1.1f%%", shadow=True, startangle=90)
-    ax1.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
-
+    # Replace the pie chart with a bar chart
     st.write("""#### Number of Data from different countries""")
+    st.bar_chart(data)
 
-    st.pyplot(fig1)
-    
     st.write(
         """
     #### Mean Salary Based On Country
