@@ -62,12 +62,9 @@ def show_explore_page():
 
     data = df["Country"].value_counts()
 
-    # Specify colors for the bar plot
-    bar_colors = sns.color_palette("viridis", len(data))
-
     # Replace the pie chart with a bar chart
     st.write("""#### Number of Data from different countries""")
-    st.bar_chart(data, color=bar_colors)
+    st.bar_chart(data)
 
     st.write(
         """
