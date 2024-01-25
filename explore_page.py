@@ -61,12 +61,15 @@ def show_explore_page():
 
     data = df["Country"].value_counts()
 
-    # Specify colors for the first bar chart
-    bar_colors_countries = sns.color_palette("pastel", len(data))
+    # Sort countries by count in descending order
+    sorted_countries = data.sort_values(ascending=False)
+
+    # Specify colors for the bar chart
+    bar_colors_countries = sns.color_palette("pastel", len(sorted_countries))
 
     # Replace the pie chart with a bar chart
     st.write("""#### Number of Data from different countries""")
-    st.bar_chart(data, color=bar_colors_countries)
+    st.bar_chart(sorted_countries, color=bar_colors_countries)
 
     st.write(
         """
