@@ -70,9 +70,13 @@ def show_explore_page():
         # Repeat the colors to match the length of data
         colors = colors * (len(data) // len(colors)) + colors[:len(data) % len(colors)]
 
-    # Replace the pie chart with a bar chart
-    st.write("""#### Number of Data from different countries""")
-    st.bar_chart(data, color=colors)
+    # Create a bar chart with custom colors
+    plt.bar(data.index, data.values, color=colors)
+
+    # Display the plot in Streamlit
+    st.pyplot(plt.gcf())
+
+    plt.clf()  # Clear the current figure for the next plot
 
     st.write(
         """
@@ -81,7 +85,10 @@ def show_explore_page():
     )
 
     data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
-    st.bar_chart(data)
+    plt.bar(data.index, data.values, color=colors)
+    st.pyplot(plt.gcf())
+
+    plt.clf()
 
     st.write(
         """
@@ -90,4 +97,5 @@ def show_explore_page():
     )
 
     data = df.groupby(["YearsCodePro"])["Salary"].mean().sort_values(ascending=True)
-    st.line_chart(data)
+    plt.plot(data.index, data.values)
+    st.pyplot(plt.gcf())
