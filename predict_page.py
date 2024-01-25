@@ -46,12 +46,12 @@ def show_predict_page():
         "Post grad",
     )
 
-    country = st.sidebar.selectbox("Country", countries)
-    education = st.sidebar.selectbox("Education Level", education)
+    country = st.selectbox("Country", countries)
+    education = st.selectbox("Education Level", education)
 
-    expericence = st.sidebar.slider("Years of Experience", 0, 50, 3)
+    expericence = st.slider("Years of Experience", 0, 50, 3)
 
-    ok = st.sidebar.button("Calculate Salary")
+    ok = st.button("Calculate Salary")
     if ok:
         X = np.array([[country, education, expericence ]])
         X[:, 0] = le_country.transform(X[:,0])
@@ -59,18 +59,17 @@ def show_predict_page():
         X = X.astype(float)
 
         salary = regressor.predict(X)
-        st.sidebar.subheader(f"The estimated salary is ${salary[0]:.2f}")
+        st.subheader(f"The estimated salary is ${salary[0]:.2f}")
 
-    # Display hyperparameters in a dropdown on the left sidebar
-    st.sidebar.write("### XGBoost Hyperparameters")
-xgb_params['learning_rate'] = st.sidebar.selectbox("Learning Rate", [0.01, 0.1, 0.2], index=1)
-xgb_params['n_estimators'] = st.sidebar.selectbox("Number of Estimators", [50, 100, 200], index=1)
-xgb_params['max_depth'] = st.sidebar.selectbox("Max Depth", [3, 5, 7], index=1)
-xgb_params['subsample'] = st.sidebar.selectbox("Subsample", [0.6, 0.8, 1.0], index=1)
-xgb_params['colsample_bytree'] = st.sidebar.selectbox("Colsample bytree", [0.6, 0.8, 1.0], index=1)
-xgb_params['objective'] = st.sidebar.selectbox("Objective", ["reg:squarederror", "reg:squaredlogerror"], index=0)
-xgb_params['random_state'] = st.sidebar.selectbox("Random State", [42, 123, 456], index=0)
-
+    # Display hyperparameters
+    st.write("### XGBoost Hyperparameters")
+    st.write(f"Learning Rate: {xgb_params['learning_rate']}")
+    st.write(f"Number of Estimators: {xgb_params['n_estimators']}")
+    st.write(f"Max Depth: {xgb_params['max_depth']}")
+    st.write(f"Subsample: {xgb_params['subsample']}")
+    st.write(f"Colsample bytree: {xgb_params['colsample_bytree']}")
+    st.write(f"Objective: {xgb_params['objective']}")
+    st.write(f"Random State: {xgb_params['random_state']}")
 
 if __name__ == "__main__":
     show_predict_page()
