@@ -71,7 +71,11 @@ def show_explore_page():
         colors = colors * (len(data) // len(colors)) + colors[:len(data) % len(colors)]
 
     # Create a bar chart with custom colors
-    plt.bar(data.index, data.values, color=colors)
+    index = data.index
+    for i,v in enumerate(index):
+        index[i] = v[0]
+        
+    plt.bar(index, data.values, color=colors)
 
     # Display the plot in Streamlit
     st.pyplot(plt.gcf())
