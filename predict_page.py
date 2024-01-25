@@ -14,6 +14,9 @@ regressor = data["model"]
 le_country = data["le_country"]
 le_education = data["le_education"]
 
+# Extract hyperparameters
+xgb_params = regressor.get_params()
+
 def show_predict_page():
     st.title("Data Science Salary Prediction")
 
@@ -57,3 +60,16 @@ def show_predict_page():
 
         salary = regressor.predict(X)
         st.subheader(f"The estimated salary is ${salary[0]:.2f}")
+
+    # Display hyperparameters
+    st.write("### XGBoost Hyperparameters")
+    st.write(f"Learning Rate: {xgb_params['learning_rate']}")
+    st.write(f"Number of Estimators: {xgb_params['n_estimators']}")
+    st.write(f"Max Depth: {xgb_params['max_depth']}")
+    st.write(f"Subsample: {xgb_params['subsample']}")
+    st.write(f"Colsample bytree: {xgb_params['colsample_bytree']}")
+    st.write(f"Objective: {xgb_params['objective']}")
+    st.write(f"Random State: {xgb_params['random_state']}")
+
+if __name__ == "__main__":
+    show_predict_page()
