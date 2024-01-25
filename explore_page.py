@@ -84,7 +84,7 @@ def show_explore_page():
     """
     )
 
-    data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
+    data = df.groupby(["Country"])["Salary"].mean()
     plt.bar(data.index, data.values, color=colors)
     st.pyplot(plt.gcf())
 
@@ -96,6 +96,6 @@ def show_explore_page():
     """
     )
 
-    data = df.groupby(["YearsCodePro"])["Salary"].mean().sort_values(ascending=True)
+    data = df.groupby(["YearsCodePro"])["Salary"].mean()
     plt.plot(data.index, data.values)
     st.pyplot(plt.gcf())
