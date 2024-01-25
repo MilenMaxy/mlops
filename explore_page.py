@@ -62,15 +62,17 @@ def show_explore_page():
 
     data = df["Country"].value_counts()
 
-    # Sort countries by count in descending order
-    sorted_countries = data.sort_values(ascending=False)
+    # Assuming you have a list of colors
+    colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
 
-    # Specify colors for the bar chart
-    bar_colors_countries = sns.color_palette("pastel", len(sorted_countries))
+    # If the number of categories is more than the number of colors
+    if len(data) > len(colors):
+        # Repeat the colors to match the length of data
+        colors = colors * (len(data) // len(colors)) + colors[:len(data) % len(colors)]
 
     # Replace the pie chart with a bar chart
     st.write("""#### Number of Data from different countries""")
-    st.bar_chart(sorted_countries, color=bar_colors_countries)
+    st.bar_chart(data, color=colors)
 
     st.write(
         """
@@ -79,11 +81,7 @@ def show_explore_page():
     )
 
     data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
-    
-    # Specify colors for the second bar chart
-    bar_colors_salary = sns.color_palette("deep", len(data))
-    
-    st.bar_chart(data, color=bar_colors_salary)
+    st.bar_chart(data)
 
     st.write(
         """
